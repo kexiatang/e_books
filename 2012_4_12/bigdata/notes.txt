@@ -1,0 +1,81 @@
+scalability and complexity with RDBS:
+
+disk I/O speed can't catch up with heavy load. "time out error"
+queue(buffer I/O in batch) is just a band-aid.
+
+sharding: some query requires multiple query linear to the number of shards (e.g. top 100 overall)
+complexity increases as number of shards increase. fault-tolerance
+
+use master-slave for each shard. slave only read, no write in case master fall down. still, lot's of work
+
+
+hadoop: high latency.
+NoSQL like Cassandra: mutable data, not human fault-tolerant 
+
+
+lambda architechture:
+batch layer:
+pre-compute batch views continuously (several hours for an update)
+
+serving layer (e.g. ElephantDB):
+index batch views
+
+
+data mart is the access layer of data warehouse. usually part of data from datawarehouse tuned for certain business
+
+
+2.master dataset
+----------------
+data model: fact-based model
+schema tool: Apache Thrift
+
+
+data as rawer as possible.
+container is NOT rawer
+unstructured data IS rawer (normalization method can improve overtime)
+
+immutable databse:
+3d database. (time dimension)
+use single column table to minimize data increment when a field is changed.
+
+advantages:
+1) human fault-tolerant, 2)CRUD->CR, 3)since only need to append, no index needed to update specific record
+
+data is always true, but could be not valuable which can be deleted some time.(e.g.garbage collection on old data)
+
+add "nonce" random value to distinguish different event with same value
+difentify duplicated transaction due to system fault.
+
+Denormalization is often done to avoid expensive joins.
+
+use enforceable schema is better than JSON format(unstructured) because catching data-related errors at creation time rather than the time use it.
+
+schema is separated from storage so it becomes language-neutral
+
+
+3.Batch layer storage
+---------------------
+tool: Hadoop Distributed File System (HDFS) with Pail(java library to abstract HDFS API)
+
+
+
+4.MapReduce and Batch Processing
+------------------------------------
+most of the time incremental algorithm is faster.
+
+cases when incremental algorithm need more space for batch views than batch algorithm:
+1.average 2. unique count
+
+batch algorithm is more likely to fix human fault easily. because it always recompute everything
+
+
+
+
+security course
+finished reading 4th chapter of big data books
+lunch talks hadoop
+
+customization.
+
+
+
