@@ -71,11 +71,3 @@ batch algorithm is more likely to fix human fault easily. because it always reco
 
 
 
-security course
-finished reading 4th chapter of big data books
-lunch talks hadoop
-
-customization.
-
-
-
